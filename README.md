@@ -4,6 +4,8 @@ Quadcopter control under wind applied on CERLAB-Control Team's DIY Team-BlackShe
 # Importance of Linearization Point (especially the wind-speed term)
 When ground-truth wind matches Linearization Point’s wind velocity, Dob provides little to no improvement over Vanilla LQR controller.
 This is because the choice of wind-vector for linearization directly affects the terms within the K matrix that map the observed disturbance back onto the control inputs. Experiments conducted in this simulation show that there is a need to update Linearization online as the wind changes to provide better robustness against wind!
+<img width="1063" alt="DOB_FLOW" src="https://user-images.githubusercontent.com/73812796/162680657-66b63baf-bfee-4746-b9e8-deb9d5e9f959.PNG">
+
 
 # Some Results from Moving Linearization Point(LP) Disturbance Observer-Based(DOb) Controller
 The wind is modeled as a random walk process.

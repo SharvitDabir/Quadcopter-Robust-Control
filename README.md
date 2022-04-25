@@ -7,7 +7,7 @@ Quadcopter control under wind applied on CERLAB-Control Team's DIY Team-BlackShe
 "Observed Disturbance" is the estimated Wind-Speed (m/s) stacked below the standard Quadcopter-State Vector. A value for Wind-Speed along all the three axes has to be chosen as a Linearization-Point.
 When ground-truth wind matches Linearization Point’s wind velocity, Dob provides little to no improvement over Vanilla LQR controller.
 This is because the choice of wind-vector for linearization directly affects the terms within the K matrix that map the observed disturbance back onto the control inputs. Experiments conducted in this simulation show that there is a need to update Linearization online as the wind changes to provide better robustness against wind!
-# Some Results from Moving Linearization Point(LP) Disturbance Observer-Based(DOb) Controller
+# Some Results from Adaptive Linearization Point(LP) Disturbance Observer-Based(DOb) Controller
 The wind is modeled as a random walk process.
 <img width="676" alt="moving_Linearization_Point1" src="https://user-images.githubusercontent.com/73812796/162678885-6f36d8a2-b6b3-4915-bbdd-a127cfebcb9e.PNG">
 <img width="519" alt="moving_Linearization_Point2" src="https://user-images.githubusercontent.com/73812796/162678892-5291c12d-e394-44a3-9e8f-712528b7596d.PNG">

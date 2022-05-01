@@ -10,6 +10,11 @@ This documentation is a part of a larger work on Quadcopter control under wind, 
 # Hover-Setpoint ([0; 0; 1] meters) Tracking of Adaptive-Linearization-DOb vs Vanilla LQR for Dynamic Wind
 <img width="637" alt="dynamic_xyz" src="https://user-images.githubusercontent.com/73812796/166128047-aa020bf9-4b97-402f-a514-d789bb8dd482.PNG">
 
+
+https://user-images.githubusercontent.com/73812796/166129197-d0c3ab85-fdd8-456a-9aa4-98c2359511fd.mp4
+
+
+
 Comparison between Adaptive-Linearization-DOb (solid plots) and Vanilla LQR (dashed plots) shows that the former is able to compensate for dynamically changing wind disturbance and the latter is not. . Here the choice of wind-velocities for linearization is updated based on the wind-estimates, thus providing active disturbance compensation unlike the naive-DOb case or Vanilla LQR case. 
 <!---Depending on the frequency of the linearization update, the quadrotor position-error with respect to the hover-setpoint can be confined to a minimum with some computational cost tradeoffs. --->
 <!---The response shown here is associated with the same wind trajectory as in Fig-\protect\ref{fig:552} --->

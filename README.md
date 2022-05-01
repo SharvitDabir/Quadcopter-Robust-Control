@@ -4,7 +4,8 @@ The choice of wind-vector for linearization directly affects the terms within th
 
 This documentation is a part of a larger work on Quadcopter control under wind, to be realized on CERLAB-Control Team's DIY Team-BlackSheep quadcopter and Crazyflie2.1 nanocopter. Methodologies implemented and researched include Optimal Control, Disturbance Observer Based Methods, H-infinity, Reinforcement Learning Based controllers etc. (Ongoing Work)
 
-<img width="1063" alt="DOB_FLOW" src="https://user-images.githubusercontent.com/73812796/162680657-66b63baf-bfee-4746-b9e8-deb9d5e9f959.PNG">
+<img width="1225" alt="DOb_corrected" src="https://user-images.githubusercontent.com/73812796/166128477-88180880-66b0-4960-8d59-e5564d256533.PNG">
+
 
 # Hover-Setpoint ([0; 0; 1] meters) Tracking of Adaptive-Linearization-DOb vs Vanilla LQR for Dynamic Wind
 <img width="637" alt="dynamic_xyz" src="https://user-images.githubusercontent.com/73812796/166128047-aa020bf9-4b97-402f-a514-d789bb8dd482.PNG">

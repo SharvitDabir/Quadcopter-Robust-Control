@@ -76,7 +76,7 @@ When ground-truth wind matches Linearization Point’s wind velocity, Dob provid
 --->
 
 # Acknowledgement 
-This work would not have been possible without the inspiration, education and support received from Dr. Kenji Shimada, Ryan Hoover, Dr. Zac Manchester, Prof. Mark Bedillion and fellow CERLAB students/researchers!
+This work would not have been possible without the inspiration, education and support received from Dr. Kenji Shimada, Ryan Hoover, Dr. Zac Manchester, Prof. Mark Bedillion, Prof. Sabat Anwar (https://www.linkedin.com/in/sabat-anwar-52b61213/) and fellow CERLAB students/researchers!
 
 # CERLAB, CMU
 This documentation is a part of a larger work on Quadcopter control under wind, to be realized on CERLAB-Control Team's DIY Team-BlackSheep quadcopter and Crazyflie2.1 nanocopter. Methodologies implemented and researched include Optimal Control, Disturbance Observer Based Methods, H-infinity, Reinforcement Learning Based controllers etc. (Ongoing Work)

@@ -1,6 +1,6 @@
 # Disturbance Observer-Based (DOb) Quadrotor Control with Adaptive Linearization for Robustness Against Random-Wind
 "Observed Disturbance" is the estimated Wind-Speed (m/s) stacked below the standard Quadcopter-State Vector. A value for Wind-Speed along all the three axes has to be chosen as a Linearization-Point.
-The choice of wind-vector for linearization directly affects the terms within the K matrix that map the observed disturbance back onto the control inputs. Experiments conducted in this simulation show that there is a need to update Linearization online (or lternatively use a Gain-Scheduling approach), as the wind changes, to provide better robustness against random wind! 
+The choice of wind-vector for linearization directly affects the terms within the K matrix that map the observed disturbance back onto the control inputs. Experiments conducted in this simulation show that there is a need to update Linearization online (or alternatively use a Gain-Scheduling approach), as the wind changes, to provide better robustness against random wind! 
 
 This documentation is a part of a larger work on Quadcopter control under wind, to be realized on CERLAB-Control Team's DIY Team-BlackSheep quadcopter and Crazyflie2.1 nanocopter. Methodologies implemented and researched include Optimal Control, Disturbance Observer Based Methods, H-infinity, Reinforcement Learning Based controllers etc. (Ongoing Work)
 
@@ -62,3 +62,5 @@ The wind is modeled as a random walk process.
 
 When ground-truth wind matches Linearization Point’s wind velocity, Dob provides little to no improvement over Vanilla LQR controller.
 --->
+
+This work would not have been possible without the inspiration, education and support received from Dr. Kenji Shimada, Ryan Hoover, Dr. Zac Manchester, Prof. Mark Bedillion and fellow CERLAB students/researchers!

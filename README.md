@@ -82,7 +82,7 @@ This work would not have been possible without the inspiration, education and su
 This documentation is a part of a larger work on Quadcopter control under wind, to be realized on CERLAB-Control Team's DIY Team-BlackSheep quadcopter and Crazyflie2.1 nanocopter. Methodologies implemented and researched include Optimal Control, Disturbance Observer Based Methods, H-infinity, Reinforcement Learning Based controllers etc. (Ongoing Work)
 
 ## References
--- https://www.youtube.com/watch?v=I2SC1Mp3Hxs&list=PLZnJoM76RM6Iaf59ICcU9-DzztGZvK_52 .
+-- CMU 16-745: https://www.youtube.com/watch?v=I2SC1Mp3Hxs&list=PLZnJoM76RM6Iaf59ICcU9-DzztGZvK_52 .
 
 -- S. Bouabdallah and R. Siegwart, "Full control of a quadrotor," 2007 IEEE/RSJ International Conference on Intelligent Robots and Systems, San Diego, CA, USA, 2007, pp. 153-158, doi: 10.1109/IROS.2007.4399042 . 
 

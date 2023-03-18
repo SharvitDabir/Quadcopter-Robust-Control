@@ -9,7 +9,7 @@ Quadcopter wants to hover as close to the setpoint as possible under the influen
 
 DOb+Linearization block includes: 
 1) Estimating Disturbance {from Vector Algebra using on-board IMU sensed and integrated quantities (not included here) , and/or Kalman Filtering} Force and/or Disturbance Moments.
-2) Solve for Equilibrium under Estimated Disturbance (Wind Force affects Quaternion-setpoint and Thrust-setpoint, while Wind-Moment affects only Control-Moment setpoints).
+2) Solve for Equilibrium under Estimated Disturbance (Wind Force affects Quaternion-setpoint and Thrust-setpoint, while Wind-Moment affects only Control-Moment setpoints). Here, quaternion-setpoint finding was inspired by a method used in PX4.
 3) Linearize about obtained X_sp (use stacked DOb vector) and U_sp vectors.
 4) Solve Riccatti Recursion using Linearized Matrices to find K_DOb.
 
@@ -75,8 +75,19 @@ The wind is modeled as a random walk process.
 When ground-truth wind matches Linearization Point’s wind velocity, Dob provides little to no improvement over Vanilla LQR controller.
 --->
 
-## Acknowledgement 
+# Acknowledgement 
 This work would not have been possible without the inspiration, education and support received from Dr. Kenji Shimada, Ryan Hoover, Dr. Zac Manchester, Prof. Mark Bedillion and fellow CERLAB students/researchers!
 
-## CERLAB, CMU
+# CERLAB, CMU
 This documentation is a part of a larger work on Quadcopter control under wind, to be realized on CERLAB-Control Team's DIY Team-BlackSheep quadcopter and Crazyflie2.1 nanocopter. Methodologies implemented and researched include Optimal Control, Disturbance Observer Based Methods, H-infinity, Reinforcement Learning Based controllers etc. (Ongoing Work)
+
+## References
+-- https://www.youtube.com/watch?v=I2SC1Mp3Hxs&list=PLZnJoM76RM6Iaf59ICcU9-DzztGZvK_52 .
+
+-- S. Bouabdallah and R. Siegwart, "Full control of a quadrotor," 2007 IEEE/RSJ International Conference on Intelligent Robots and Systems, San Diego, CA, USA, 2007, pp. 153-158, doi: 10.1109/IROS.2007.4399042 . 
+
+-- PX4 Architecture: https://docs.px4.io/main/en/concept/architecture.html . 
+
+-- PX4 Multi-Copter Control Architecture: http://docs.px4.io/master/en/flight_stack/controller_diagrams.html . 
+
+-- https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/154099/eth-7387-01.pdf . 

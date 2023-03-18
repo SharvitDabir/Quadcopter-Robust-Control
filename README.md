@@ -1,37 +1,49 @@
 # Disturbance Observer-Based (DOb) Quadrotor Control with Adaptive Linearization for Robustness Against Random-Wind
-"Observed Disturbance" is the estimated Wind-Speed (m/s) stacked below the standard Quadcopter-State Vector. A value for Wind-Speed along all the three axes has to be chosen as a Linearization-Point.
-The choice of wind-vector for linearization directly affects the terms within the K matrix that map the observed disturbance back onto the control inputs. Experiments conducted in JULIA simulation show that there is a need to update Linearization online (or alternatively use a Gain-Scheduling approach), as the wind changes, to provide better robustness against random wind! 
 
-This documentation is a part of a larger work on Quadcopter control under wind, to be realized on CERLAB-Control Team's DIY Team-BlackSheep quadcopter and Crazyflie2.1 nanocopter. Methodologies implemented and researched include Optimal Control, Disturbance Observer Based Methods, H-infinity, Reinforcement Learning Based controllers etc. (Ongoing Work)
+## Objective
+Quadcopter wants to hover as close to the setpoint as possible under the influence of dynamic wind (Wind Torque disturbances can be accounted for, for future research)
 
+## Control Architecture
 <!--- <img width="1225" alt="DOb_corrected" src="https://user-images.githubusercontent.com/73812796/166128477-88180880-66b0-4960-8d59-e5564d256533.PNG"> --->
 <img width="1225" alt="DOb_corrected" src="https://user-images.githubusercontent.com/73812796/226098998-f9baef64-c95d-4c63-bd94-c934069e61cb.png">
 
+DOb+Linearization block includes: 
+1) Estimating Disturbance {from Vector Algebra using on-board IMU sensed and integrated quantities (not included here) , and/or Kalman Filtering} Force and/or Disturbance Moments.
+2) Solve for Equilibrium under Estimated Disturbance (Wind Force affects Quaternion-setpoint and Thrust-setpoint, while Wind-Moment affects only Control-Moment setpoints).
+3) Linearize about obtained X_sp (use stacked DOb vector) and U_sp vectors.
+4) Solve Riccatti Recursion using Linearized Matrices to find K_DOb.
 
-# Hover-Setpoint ([0; 0; 1] meters) Tracking of Adaptive-Linearization-DOb vs Vanilla LQR for Dynamic Wind
+## Intuition
+One intuitive way of looking at the failure of LQR is that LQR can be said to be a PD controller, which has no extra machinery to compensate for the steady-state error (for instance, an Integral term) in case of a disturbance/push away from the setpoint. Adaptive-Linearization-DOb provides this "extra-sauce" to make the drone stick near the setpoint better.
+
+## State-Disturbance Stacked Vector
+"Observed Disturbance" is the estimated Wind-Speed (m/s) stacked below the standard Quadcopter-State Vector. A value for Wind-Speed along all the three axes has to be chosen as a Linearization-Point. (Wind Force value can be chosen for mathematical convenience depending on the reader's preference)
+The choice of wind-vector for linearization directly affects the terms within the K matrix that map the observed disturbance back onto the control inputs. Experiments conducted in JULIA simulation show that there is a need to update Linearization online (or alternatively use a Gain-Scheduling approach), as the wind changes, to provide better robustness against random wind! 
+
+## Results
+### Hover-Setpoint ([0; 0; 1] meters) Tracking of Adaptive-Linearization-DOb vs Vanilla LQR for Dynamic Wind
 <img width="637" alt="dynamic_xyz" src="https://user-images.githubusercontent.com/73812796/166128047-aa020bf9-4b97-402f-a514-d789bb8dd482.PNG">
-
-
 
 
 Comparison between Adaptive-Linearization-DOb (solid plots) and Vanilla LQR (dashed plots) shows that the former is able to compensate for dynamically changing wind disturbance and the latter is not. . Here the choice of wind-velocities for linearization is updated based on the wind-estimates, thus providing active disturbance compensation unlike the naive-DOb case or Vanilla LQR case. 
 <!---Depending on the frequency of the linearization update, the quadrotor position-error with respect to the hover-setpoint can be confined to a minimum with some computational cost tradeoffs. --->
 <!---The response shown here is associated with the same wind trajectory as in Fig-\protect\ref{fig:552} --->
 
-# Hover-Setpoint ([0; 0; 1] meters) Tracking of Adaptive-Linearization-DOb vs Vanilla LQR for Quasi-Static Wind
+### Hover-Setpoint ([0; 0; 1] meters) Tracking of Adaptive-Linearization-DOb vs Vanilla LQR for Quasi-Static Wind
 <img width="630" alt="static_xyz" src="https://user-images.githubusercontent.com/73812796/166128070-7a635805-b5be-41c7-946f-da05c26717b6.PNG">
 
 Comparison between Adaptive-Linearization-DOb (solid plots) and Vanilla LQR (dashed plots) shows that the former is able to compensate for the steady-disturbance and the latter gives in to the steady-wind.  Here the choice of wind-velocities for linearization is updated based on the wind-estimates, thus providing active disturbance compensation unlike the naive-DOb case or Vanilla LQR case.
 One intuitive way of looking at the failure of LQR is that LQR can be said to be a PD controller, which has no extra machinery to compensate for the steady-state error (for instance, an Integral term). Adaptive-Linearization-DOb provides this "extra-sauce" to make the drone stick to the setpoint.
 <!---The response shown here is associated with the same wind trajectory as in Fig-\protect\ref{fig:552}. --->
 
-# Limitation of Naive DOb (i.e. without adaptive linearization)
+## Why Adaptive-DOb?
+### Limitation of Naive DOb (i.e. without adaptive linearization)
 <img width="705" alt="naivex" src="https://user-images.githubusercontent.com/73812796/166128076-ecb2d0f5-d085-47d7-b30b-49a0fd1e9f80.PNG">
 <img width="703" alt="naivey" src="https://user-images.githubusercontent.com/73812796/166128078-8296e6bf-a69e-42c3-806c-b35d7a4fd8da.PNG">
 
 These images illustrate the X and Y position tracking performance in hover, for three different choices of linearization after which the quadrotor was subjected to wind that was initialized at [4;4;1] m/s and constrained to stay quasi-static. Here, despite the wind being quasi-static, the performance is not satisfactory,dynamically changing wind will make the performance poor and unpredictable. The basin of choice of wind-velocities for which the disturbance compensation would bring back the drone to the setpoint is extremely narrow, and it depends on luck. This arguement strengthens the need for Adaptive-Linearization-DOb to actually provide disturbance-rejection
 
-# Random-Walk Wind and Disturbance Estimation
+## Random-Walk Wind and Disturbance Estimation
 <img width="590" alt="431_wind" src="https://user-images.githubusercontent.com/73812796/166128109-904f91e3-9788-4eb0-bdca-31281210ddf9.PNG">
 <img width="580" alt="431_windest" src="https://user-images.githubusercontent.com/73812796/166128113-e16f2a09-1abd-4749-9e1f-809179b5c605.PNG">
 
@@ -63,4 +75,8 @@ The wind is modeled as a random walk process.
 When ground-truth wind matches Linearization Point’s wind velocity, Dob provides little to no improvement over Vanilla LQR controller.
 --->
 
+## Acknowledgement 
 This work would not have been possible without the inspiration, education and support received from Dr. Kenji Shimada, Ryan Hoover, Dr. Zac Manchester, Prof. Mark Bedillion and fellow CERLAB students/researchers!
+
+## CERLAB, CMU
+This documentation is a part of a larger work on Quadcopter control under wind, to be realized on CERLAB-Control Team's DIY Team-BlackSheep quadcopter and Crazyflie2.1 nanocopter. Methodologies implemented and researched include Optimal Control, Disturbance Observer Based Methods, H-infinity, Reinforcement Learning Based controllers etc. (Ongoing Work)
